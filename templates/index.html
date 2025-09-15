@@ -9,15 +9,41 @@
 <body>
   <header>
     <h1>Параметры работ</h1>
-    <p>Заполните форму и отправьте данные на сервер. Поля с * обязательны.</p>
+    <p>Заполните форму и отправьте данные на сервер</p>
   </header>
 
   <div class="container">
     <form id="workForm" novalidate>
       <div class="grid" aria-label="Основные параметры">
         <!-- Поля формы, как в предыдущем примере -->
+
         <div class="field third">
-          <label for="productType">Тип продукции *</label>
+          <label for="project">Проект</label>
+          <input id="project" name="project" list="projectList" required placeholder="Напр.: АЭС Руппур" />
+          <datalist id="projectList">
+            {% for project in projects %}
+             <option value="{{ project }}">{{project}}</option>
+            {% endfor %}
+          </datalist>
+        </div>
+
+        <div class="field third">
+          <label for="department">Подразделение</label>
+          <input id="department" name="department" required placeholder="Напр.: Отдел технологического оборудования" />
+        </div>
+
+        <div class="field third">
+          <label for="specialty">Специальность</label>
+          <input id="specialty" name="specialty" list="specialityTypeList" required placeholder="Напр.: Электрические специальности, Инженерные изыскания" />
+          <datalist id="specialityTypeList">
+            {% for functional_name in functional_names %}
+            <option value="{{ functional_name }}">{{functional_name}}</option>
+            {% endfor %}
+          </datalist>
+        </div>
+
+        <div class="field third">
+          <label for="productType">Тип продукции</label>
           <input id="productType" name="productType" list="productTypeList" required placeholder="Напр.: РД, Спецификация, Лот" />
           <datalist id="productTypeList">
             {% for type_product in type_products %}
@@ -27,13 +53,40 @@
         </div>
 
         <div class="field third">
-          <label for="project">Проект *</label>
-          <input id="project" name="project" required placeholder="Напр.: АЭС Руппур" />
+          <label for="docType">Тип документации</label>
+          <input id="docType" name="docType" list="docTypeList" placeholder="Напр.: ТП, РД, (П, Пр, О)ООБ, Отчет" />
+          <datalist id="docTypeList">
+            {% for type_doc_new in type_docs_new %}
+            <option value="{{ type_doc_new }}">{{type_doc_new}}</option>
+            {% endfor %}
+          </datalist>
         </div>
 
         <div class="field third">
-          <label for="department">Подразделение *</label>
-          <input id="department" name="department" required placeholder="Напр.: Отдел технологического оборудования" />
+          <label for="docKind2">Видопредставление документа</label>
+          <input id="docKind2" name="docKind2" list="docKind2List" placeholder="Текстовый, графический, табличный и т.п. " />
+          <datalist id="docKind2List">
+            {% for view_doc_new in view_docs_new %}
+            <option value="{{ view_doc_new }}">{{view_doc_new}}</option>
+            {% endfor %}
+          </datalist>
+        </div>
+
+        <div class="field second">
+          <label for="docKind1">Вид документа</label>
+          <input id="docKind1" name="docKind1" list="docKindList" placeholder="Напр.: Архитектурные чертежи" />
+          <datalist id="docKindList">
+          </datalist>
+        </div>
+
+        <div class="field second">
+          <label for="workType">Тип работы</label>
+          <input id="workType" name="workType" list="workTypeList" required placeholder="Напр.: Разработка, Сопровождение передачи" />          <datalist id="projectTypeList">
+          <datalist id="workTypeList">
+            {% for type_work_name in type_work_names %}
+            <option value="{{ type_work_name }}">{{type_work_name}}</option>
+            {% endfor %}
+          </datalist>
         </div>
 
         <div class="field full">
@@ -42,68 +95,17 @@
         </div>
 
         <div class="field third">
-          <label for="docKind1">Вид документа</label>
-          <input id="docKind1" name="docKind1" list="docKindList" placeholder="Напр.: Архитектурные чертежи" />
-        </div>
-
-        <div class="field third">
-          <label for="docType">Тип документации</label>
-          <input id="docType" name="docType" list="docTypeList" placeholder="Напр.: ТП, РД, (П, Пр, О)ООБ, Отчет" />
-          <datalist id="docTypeList">
-          </datalist>
-        </div>
-
-        <div class="field third">
-          <label for="docKind2">Видопредставление документа</label>
-          <input id="docKind2" name="docKind2" placeholder="Текстовый, графический, табличный и т.п. " />
-        </div>
-
-        <div class="field third">
-          <label for="workStatus">Статус работы *</label>
-          <select id="workStatus" name="workStatus" required>
-            <option value="" disabled selected>Выберите статус</option>
-            <option>Ожидание</option>
-			<option>Запланировано</option>
-            <option>В работе</option>
-            <option>Выполнено</option>
-            <option>Аннулировано</option>
-          </select>
-        </div>
-
-        <div class="field third">
-          <label for="workType">Тип работы *</label>
-          <input id="workType" name="workType" list="workTypeList" required placeholder="Напр.: Разработка, Сопровождение передачи" />
-          <datalist id="workTypeList">
-            <option value="Разработка"></option>
-            <option value="Рассмотрение и согласование входящей документации"></option>
-            <option value="Рассмотрение и согласование документации смежных подразделений"></option>
-            <option value="Сопровождение передачи внешнему заказчику"></option>
-            <option value="Сопровождение передачи внутреннему заказчику"></option>
-          </datalist>
-        </div>
-
-        <div class="field third">
-          <label for="specialty">Специальность *</label>
-          <input id="specialty" name="specialty" required placeholder="Напр.: Электрические специальности, Инженерные изыскания" />
-        </div>
-
-        <div class="field quarter">
-          <label for="plannedEffort">Плановые трудозатраты (часы) *</label>
+          <label for="plannedEffort">Планируемые трудозатраты (человеко-часы)</label>
           <input id="plannedEffort" name="plannedEffort" type="number" inputmode="decimal" min="0" step="0.25" required placeholder="0" />
         </div>
 
-        <div class="field quarter">
-          <label for="actualEffort">Фактические трудозатраты (часы)</label>
-          <input id="actualEffort" name="actualEffort" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
-        </div>
-
-        <div class="field quarter">
-          <label for="operationalEffort">Трудозатраты по оперативным планам (часы)</label>
+        <div class="field third">
+          <label for="operationalEffort">Трудозатраты по оперативным планам (человеко-часы)</label>
           <input id="operationalEffort" name="operationalEffort" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
         </div>
 
-        <div class="field quarter">
-          <label for="normativeEffort">Нормативные трудозатраты (часы)</label>
+        <div class="field third">
+          <label for="normativeEffort">Нормативные трудозатраты (человеко-часы)</label>
           <input id="normativeEffort" name="normativeEffort" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
         </div>
 
