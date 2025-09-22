@@ -23,18 +23,18 @@ def say_hello(name: str = "World"):
 def index(request: Request):
     type_products = []
     with SessionLocal() as session:
-        query_tp = select(WorkPlanFact.type_product).distinct()
-        type_products = session.execute(query_tp).scalars().all()
-        query_pj = select(WorkPlanFact.project).distinct()
-        projects = session.execute(query_pj).scalars().all()
-        query_tw = select(WorkPlanFact.type_work_name).distinct()
-        type_work_names = session.execute(query_tw).scalars().all()
-        query_fn = select(WorkPlanFact.functional_name).distinct()
-        functional_names = session.execute(query_fn).scalars().all()
-        query_td = select(WorkPlanFact.type_doc_new).distinct()
-        type_docs_new = session.execute(query_td).scalars().all()
-        query_vd = select(WorkPlanFact.view_doc_new).distinct()
-        view_docs_new = session.execute(query_vd).scalars().all()
+        query = select(WorkPlanFact.type_product).distinct()
+        type_products = session.execute(query).scalars().all()
+        query = select(WorkPlanFact.project).distinct()
+        projects = session.execute(query).scalars().all()
+        query = select(WorkPlanFact.type_work_name).distinct()
+        type_work_names = session.execute(query).scalars().all()
+        query = select(WorkPlanFact.functional_name).distinct()
+        functional_names = session.execute(query).scalars().all()
+        query = select(WorkPlanFact.type_doc_new).distinct()
+        type_docs_new = session.execute(query).scalars().all()
+        query = select(WorkPlanFact.view_doc_new).distinct()
+        view_docs_new = session.execute(query).scalars().all()
     return templates.TemplateResponse("index.html", {
         "request": request,
         "type_products": type_products,

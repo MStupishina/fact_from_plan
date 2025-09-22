@@ -19,7 +19,7 @@
 
         <div class="field third">
           <label for="project">Проект</label>
-          <input id="project" name="project" list="projectList" required placeholder="Напр.: АЭС Руппур" />
+          <input id="project" name="PROJECT" list="projectList" required placeholder="Напр.: АЭС Руппур" />
           <datalist id="projectList">
             {% for project in projects %}
              <option value="{{ project }}">{{project}}</option>
@@ -29,12 +29,12 @@
 
         <div class="field third">
           <label for="department">Подразделение</label>
-          <input id="department" name="department" required placeholder="Напр.: Отдел технологического оборудования" />
+          <input id="department" name="DIVISION_NAME" required placeholder="Напр.: Отдел технологического оборудования" />
         </div>
 
         <div class="field third">
           <label for="specialty">Специальность</label>
-          <input id="specialty" name="specialty" list="specialityTypeList" required placeholder="Напр.: Электрические специальности, Инженерные изыскания" />
+          <input id="specialty" name="FUNCTIONAL_NAME" list="specialityTypeList" required placeholder="Напр.: Электрические специальности, Инженерные изыскания" />
           <datalist id="specialityTypeList">
             {% for functional_name in functional_names %}
             <option value="{{ functional_name }}">{{functional_name}}</option>
@@ -44,7 +44,7 @@
 
         <div class="field third">
           <label for="productType">Тип продукции</label>
-          <input id="productType" name="productType" list="productTypeList" required placeholder="Напр.: РД, Спецификация, Лот" />
+          <input id="productType" name="TYPE_PRODUCT" list="productTypeList" required placeholder="Напр.: РД, Спецификация, Лот" />
           <datalist id="productTypeList">
             {% for type_product in type_products %}
              <option value="{{ type_product }}">{{type_product}}</option>
@@ -54,7 +54,7 @@
 
         <div class="field third">
           <label for="docType">Тип документации</label>
-          <input id="docType" name="docType" list="docTypeList" placeholder="Напр.: ТП, РД, (П, Пр, О)ООБ, Отчет" />
+          <input id="docType" name="TYPE_DOC_NEW" list="docTypeList" placeholder="Напр.: ТП, РД, (П, Пр, О)ООБ, Отчет" />
           <datalist id="docTypeList">
             {% for type_doc_new in type_docs_new %}
             <option value="{{ type_doc_new }}">{{type_doc_new}}</option>
@@ -64,7 +64,7 @@
 
         <div class="field third">
           <label for="docKind2">Видопредставление документа</label>
-          <input id="docKind2" name="docKind2" list="docKind2List" placeholder="Текстовый, графический, табличный и т.п. " />
+          <input id="docKind2" name="VIEW_DOC_NEW" list="docKind2List" placeholder="Текстовый, графический, табличный и т.п. " />
           <datalist id="docKind2List">
             {% for view_doc_new in view_docs_new %}
             <option value="{{ view_doc_new }}">{{view_doc_new}}</option>
@@ -74,14 +74,14 @@
 
         <div class="field second">
           <label for="docKind1">Вид документа</label>
-          <input id="docKind1" name="docKind1" list="docKindList" placeholder="Напр.: Архитектурные чертежи" />
+          <input id="docKind1" name="DOC_TYPE_NAME" list="docKindList" placeholder="Напр.: Архитектурные чертежи" />
           <datalist id="docKindList">
           </datalist>
         </div>
 
         <div class="field second">
           <label for="workType">Тип работы</label>
-          <input id="workType" name="workType" list="workTypeList" required placeholder="Напр.: Разработка, Сопровождение передачи" />          <datalist id="projectTypeList">
+          <input id="workType" name="TYPE_WORK_NAME" list="workTypeList" required placeholder="Напр.: Разработка, Сопровождение передачи" />          <datalist id="projectTypeList">
           <datalist id="workTypeList">
             {% for type_work_name in type_work_names %}
             <option value="{{ type_work_name }}">{{type_work_name}}</option>
@@ -91,34 +91,34 @@
 
         <div class="field full">
           <label for="standardName">Название норматива</label>
-          <input id="standardName" name="standardName" placeholder="Напр.: Чертежи трубопроводов и опор. На базе 3D-модели" />
+          <input id="standardName" name="STANDART_NAME" placeholder="Напр.: Чертежи трубопроводов и опор. На базе 3D-модели" />
         </div>
 
         <div class="field third">
           <label for="plannedEffort">Планируемые трудозатраты (человеко-часы)</label>
-          <input id="plannedEffort" name="plannedEffort" type="number" inputmode="decimal" min="0" step="0.25" required placeholder="0" />
+          <input id="plannedEffort" name="PLAN_LABOR" type="number" inputmode="decimal" min="0" step="0.25" required placeholder="0" />
         </div>
 
         <div class="field third">
           <label for="operationalEffort">Трудозатраты по оперативным планам (человеко-часы)</label>
-          <input id="operationalEffort" name="operationalEffort" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
+          <input id="operationalEffort" name="OPERPLAN_LABOR" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
         </div>
 
         <div class="field third">
           <label for="normativeEffort">Нормативные трудозатраты (человеко-часы)</label>
-          <input id="normativeEffort" name="normativeEffort" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
+          <input id="normativeEffort" name="STANDART_LABOR" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0" />
         </div>
 
         <div class="field third">
           <label for="workCost">Стоимость работы (в руб.)</label>
-          <input id="workCost" name="workCost" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" />
+          <input id="workCost" name="CASH" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" />
         </div>
       </div>
 
       <div class="actions">
         <button type="submit" class="primary">Отправить на сервер</button>
         <button type="button" class="neutral" id="saveDraftBtn">Сохранить черновик</button>
-        <button type="button" class="danger" id="clearBtn">Очистить форму</button>
+        <button type="button" class="danger" id="clearBtn" onclick="clearForm()">Очистить форму</button>
         <div class="status" aria-live="polite">
           <span class="pill" id="autosaveState">Автосохранение включено</span>
           <span id="serverState"></span>
@@ -128,9 +128,9 @@
 
     <div class="panel">
       <strong>JSON-предпросмотр</strong>
-      <pre id="preview" tabindex="0" aria-label="Предпросмотр JSON"></pre>
+      <pre id="preview" tabindex="0" aria-label="Фактические трудозатраты, человеко-часы">123</pre>
       <div style="margin-top:10px; display:flex; gap:10px; flex-wrap: wrap;">
-        <button type="button" class="ghost" id="copyJsonBtn">Скопировать JSON</button>
+        <button type="button" class="ghost" id="copyBtn" onclick="copyText()">Скопировать</button>
         <button type="button" class="neutral" id="loadDraftBtn">Загрузить черновик</button>
       </div>
     </div>

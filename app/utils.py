@@ -30,6 +30,10 @@ def predict(work):
             source_features[param] = value
         df = pd.DataFrame([features])
         fact_labor = model_cat_loaded.predict(df)
+        fact_labor_true = None if "FACT_LABOR" not in source_features else float(source_features.get("FACT_LABOR"))
+        error = None
+        if fact_labor_true is not None:
+            error = float(fact_labor) - fact_labor_true
         with SessionLocal() as session:
             history_predict = HistoryPredictions(
                 type_product=source_features.get("TYPE_PRODUCT"),
@@ -45,9 +49,9 @@ def predict(work):
                 standart_labor=float(source_features.get("STANDART_LABOR")),
                 plan_labor=float(source_features.get("PLAN_LABOR")),
                 cash=float(source_features.get("CASH")),
-                fact_labor_true=float(source_features.get("FACT_LABOR")),
+                fact_labor_true=fact_labor_true,
                 fact_labor_predict=float(fact_labor),
-                error=float(fact_labor - float(source_features.get("FACT_LABOR")))
+                error=error
             )
             session.add(history_predict)
             session.commit()
