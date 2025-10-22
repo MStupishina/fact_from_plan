@@ -78,8 +78,9 @@ def predict_test(work):
     except Exception as e: return False, str(e)
 
 
-def predict_test_plus(works_plus: list):
-    data_test = pd.read_csv("data_set/data_set_11.08.25_2.csv", sep=";", decimal=",")
+def predict_test_plus(works_plus: list, data_test=None):
+    if data_test is None:
+        data_test = pd.read_csv("data_set/data_set_11.08.25_2.csv", sep=";", decimal=",")
     features_list=[]
     source_features_list=[]
     fact_true_list = []
@@ -97,7 +98,8 @@ def predict_test_plus(works_plus: list):
             for param, data in zip(num_parameters, test_num_data):
                 features[param] = data
                 source_features[param] = data
-            fact_true_list.append(data_test.at[i, 'FACT_LABOR'])
+            fact_labor_true = None if "FACT_LABOR" not in source_features else float(source_features.get("FACT_LABOR"))
+            fact_true_list.append(fact_labor_true)
             features_list.append(features)
             source_features_list.append(source_features)
         except Exception as e: print('Нет данных', e)
@@ -106,11 +108,14 @@ def predict_test_plus(works_plus: list):
     results=[]
     with SessionLocal() as session:
         for feature, fact_true, fact_predict in zip(source_features_list, fact_true_list,fact_labor_predict):
+            error = None
+            if fact_true is not None:
+                error = float(fact_predict - fact_true)
             results.append({
                 'plan_labor': float(feature['PLAN_LABOR']),
-                'fact_labor_true': float(fact_true),
+                'fact_labor_true': fact_true,
                 'fact_labor_predict': float(fact_predict),
-                'error': float(fact_predict - fact_true)
+                'error': error
             })
 
             history_predict = HistoryPredictions(
@@ -127,9 +132,9 @@ def predict_test_plus(works_plus: list):
                 standart_labor=float(feature.get("STANDART_LABOR")),
                 plan_labor=float(feature.get("PLAN_LABOR")),
                 cash=float(feature.get("CASH")),
-                fact_labor_true=float(fact_true),
+                fact_labor_true=fact_true,
                 fact_labor_predict=float(fact_predict),
-                error=float(fact_predict - fact_true)
+                error=error
             )
             session.add(history_predict)
         session.commit()

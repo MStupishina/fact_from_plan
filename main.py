@@ -48,5 +48,6 @@ def index(request: Request):
 
 app.include_router(router_prediction)
 app.include_router(router_test_prediction)
+app.include_router(router_set_prediction)
 
 uvicorn.run(app)
