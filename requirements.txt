@@ -7,3 +7,4 @@ sqlalchemy
 python-dotenv
 jinja2
 python-multipart
+scikit-learn
