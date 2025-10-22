@@ -50,4 +50,4 @@ app.include_router(router_prediction)
 app.include_router(router_test_prediction)
 app.include_router(router_set_prediction)
 
-uvicorn.run(app, port=8100)
+uvicorn.run(app,host="0.0.0.0", port=8100)
