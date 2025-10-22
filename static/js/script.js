@@ -22,6 +22,7 @@ async function clearForm(){
 
 document.addEventListener("DOMContentLoaded", ()=>{
     const form = document.getElementById("workForm")
+    let current_file = null
 
     function calculate_fact(e) {
         e.preventDefault()
@@ -51,5 +52,50 @@ document.addEventListener("DOMContentLoaded", ()=>{
           });
 
     }
+    function calculate_fact_from_file(e) {
+        console.log("info")
+        const form_data = new FormData()
+        form_data.append("file", e.target.files[0])
+        fetch("/set_works", {
+          method: "POST", // или GET, PUT, DELETE
+          body: form_data
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Ошибка сети: " + response.status);
+            }
+            return response.blob(); // или response.text()
+          })
+          .then(data => {
+            console.log("Ответ сервера:", data);
+            current_file = data
+            const result = document.getElementById("preview")
+            result.textContent="Расчет выполнен, нажмите кнопку Выгрузить результат"
+          })
+          .catch(error => {
+            console.error("Ошибка:", error);
+          });
+
+    }
+
+    document.getElementById("result").addEventListener("click", () => {
+      if (!current_file) {
+        alert("Нет данных для скачивания");
+        return;
+      }
+
+      const url = URL.createObjectURL(current_file);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "result.xlsx"; // имя скачиваемого файла
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+
     form.addEventListener("submit", calculate_fact)
+    console.log("change")
+    document.getElementById("file_input").addEventListener("change", calculate_fact_from_file)
 })

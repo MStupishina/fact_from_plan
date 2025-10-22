@@ -117,7 +117,7 @@
 
       <div class="actions">
         <button type="submit" class="primary">Отправить на сервер</button>
-        <button type="button" class="neutral" id="saveDraftBtn">Сохранить черновик</button>
+        <input type="file" class="neutral" id="file_input">
         <button type="button" class="danger" id="clearBtn" onclick="clearForm()">Очистить форму</button>
         <div class="status" aria-live="polite">
           <span class="pill" id="autosaveState">Автосохранение включено</span>
@@ -131,7 +131,7 @@
       <pre id="preview" tabindex="0" aria-label="Фактические трудозатраты, человеко-часы">123</pre>
       <div style="margin-top:10px; display:flex; gap:10px; flex-wrap: wrap;">
         <button type="button" class="ghost" id="copyBtn" onclick="copyText()">Скопировать</button>
-        <button type="button" class="neutral" id="loadDraftBtn">Загрузить черновик</button>
+        <button type="button" class="neutral" id="result">Выгрузить результаты</button>
       </div>
     </div>
   </div>
